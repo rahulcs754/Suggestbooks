@@ -1,22 +1,23 @@
 import { useState } from "react";
 import "./styles.css";
-var basePath = "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&";
+var basePath =
+  "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&limit=5&q=";
 
 export default function App() {
   var [output, setoutput] = useState("");
 
   function searchSuggestHandler(e) {
     var userInput = e.target.value;
-    var callback = constructURL(userInput);
+    var callback = basePath + userInput;
     console.log(callback);
-    /*fetch(callback)
-      .then((res) => res.json())
-      .then((data) => console.log(data));*/
-  }
-
-  function constructURL(userInput) {
-    var encodedURI = encodeURI(userInput);
-    return `${basePath}q=${encodedURI}`;
+    if (userInput !== "" && userInput !== null && userInput !== undefined) {
+      fetch(callback)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+    } else {
+      alert("Please enter valid value");
+    }
   }
 
   return (
@@ -27,7 +28,7 @@ export default function App() {
         you are searching movie like wanted or series then you just type name in
         input box
       </p>
-      <input onChange={searchSuggestHandler} />
+      <input onBlur={searchSuggestHandler} />
       <h2>Output Below</h2>
     </div>
   );
