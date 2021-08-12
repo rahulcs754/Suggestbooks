@@ -2,16 +2,24 @@ import { useState } from "react";
 import "./styles.css";
 
 export default function App() {
-  var [data, setdata] = useState("");
+  var [output, setoutput] = useState("");
 
   function searchSuggestHandler(e) {
-    console.log(e.target.value);
+    var userInput = e.target.value;
     var basePath =
-      "https://kitsu.io/api/edgeanime?filter[categories]=adventure";
-    fetch(basePath)
+      "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&info=1&";
+    var callback = constructURL(userInput);
+
+    fetch(callback)
       .then((res) => res.json())
       .then((data) => console.log(data));
   }
+
+  function constructURL(userInput) {
+    var encodedURI = encodeURI(userInput);
+    return `${basePath}q=${encodedURI}`;
+  }
+
   return (
     <div className="App">
       <h1>Welcome Suggestion Website</h1>
