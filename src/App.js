@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./styles.css";
-var basePath =
-  "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&info=1&";
+var basePath = "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&";
 
 export default function App() {
   var [output, setoutput] = useState("");
@@ -9,10 +8,10 @@ export default function App() {
   function searchSuggestHandler(e) {
     var userInput = e.target.value;
     var callback = constructURL(userInput);
-
-    fetch(callback)
+    console.log(callback);
+    /*fetch(callback)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log(data));*/
   }
 
   function constructURL(userInput) {
