@@ -8,7 +8,7 @@ export default function App() {
 
   function searchSuggestHandler(e) {
     var userInput = e.target.value;
-    var callback = basePath + userInput;
+    var callback = basePath + encodeURI(userInput);
     console.log(callback);
     if (userInput !== "" && userInput !== null && userInput !== undefined) {
       fetch(callback)
