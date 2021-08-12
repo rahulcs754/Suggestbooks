@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./styles.css";
+var basePath =
+  "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&info=1&";
 
 export default function App() {
   var [output, setoutput] = useState("");
 
   function searchSuggestHandler(e) {
     var userInput = e.target.value;
-    var basePath =
-      "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&info=1&";
     var callback = constructURL(userInput);
 
     fetch(callback)
