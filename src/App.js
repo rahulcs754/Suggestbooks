@@ -3,13 +3,13 @@ import "./styles.css";
 
 const imgUrl =
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80";
+const postUrl = "https://www.themoviedb.org/t/p/w220_and_h330_face";
 export default function App() {
   var [movie, setmovie] = useState("");
 
   function poppularClickHandler(e) {
     var userInput = "popular";
-    var callback =
-      "https://api.themoviedb.org/3/movie/popular?api_key=eef068dc56a744f6b8d02582e584cf18&language=en-US&page=1";
+    var callback = `https://api.themoviedb.org/3/movie/${userInput}?api_key=eef068dc56a744f6b8d02582e584cf18&language=en-US&page=1`;
 
     fetch(callback)
       .then((res) => res.json())
@@ -25,16 +25,22 @@ export default function App() {
         input box
       </p>
 
-      <button onClick={poppularClickHandler}>Popular </button>
+      <button onClick={poppularClickHandler}>Popular Movies </button>
 
       <hr />
       <div className="movieview">
-        <div class="card-box">
+        <div className="card-box">
           {Object.keys(movie).map((item, index) => {
             return (
-              <div class="card">
-                <img src={imgUrl} />
-                <div class="card-text">{movie[item].original_title}</div>
+              <div className="card">
+                <img
+                  src={postUrl + movie[item].poster_path}
+                  alt={movie[item].original_title}
+                />
+                <div className="card-text">
+                  <p className="text-set"> {movie[item].original_title}</p>
+                  <p> rate : {movie[item].vote_average}</p>
+                </div>
               </div>
             );
           })}
