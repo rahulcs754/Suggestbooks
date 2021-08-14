@@ -1,45 +1,50 @@
 import { useState } from "react";
 import "./styles.css";
 
-const imgUrl =
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80";
 const postUrl = "https://www.themoviedb.org/t/p/w220_and_h330_face";
+
 export default function App() {
-  var [movie, setmovie] = useState("");
+  var [datalist, setdatalist] = useState("");
 
   function poppularClickHandler(e) {
-    var userInput = "popular";
-    var callback = `https://api.themoviedb.org/3/movie/${userInput}?api_key=eef068dc56a744f6b8d02582e584cf18&language=en-US&page=1`;
+    var featureInput = "popular";
+    var userInput = e.target.getAttribute("data-tag");
 
-    fetch(callback)
+    var movieUrl = `https://api.themoviedb.org/3/${userInput}/${featureInput}?api_key=eef068dc56a744f6b8d02582e584cf18&language=en-US&page=1`;
+
+    fetch(movieUrl)
       .then((res) => res.json())
-      .then((res) => setmovie(res.results))
+      .then((res) => setdatalist(res.results))
       .catch((error) => console.log("error", error));
   }
 
   return (
     <div className="App">
-      <h1>🎥 Movie</h1>
-      <p>
-        you are searching movie like wanted or series then you just type name in
-        input box
-      </p>
+      <h1>
+        <span>🎥</span> Movie
+      </h1>
+      <p>you can check popular Movies and Tv Shows</p>
 
-      <button onClick={poppularClickHandler}>Popular Movies </button>
+      <button data-tag="movie" onClick={poppularClickHandler}>
+        Popular Movies{" "}
+      </button>
+      <button data-tag="tv" onClick={poppularClickHandler}>
+        Popular Tv Shows{" "}
+      </button>
 
       <hr />
       <div className="movieview">
         <div className="card-box">
-          {Object.keys(movie).map((item, index) => {
+          {Object.keys(datalist).map((item, index) => {
             return (
-              <div className="card">
+              <div className="card" key={index}>
                 <img
-                  src={postUrl + movie[item].poster_path}
-                  alt={movie[item].original_title}
+                  src={postUrl + datalist[item].poster_path}
+                  alt={datalist[item].original_title}
                 />
                 <div className="card-text">
-                  <p className="text-set"> {movie[item].original_title}</p>
-                  <p> rate : {movie[item].vote_average}</p>
+                  <p className="text-set"> {datalist[item].original_title}</p>
+                  <p> rate : {datalist[item].vote_average}</p>
                 </div>
               </div>
             );
