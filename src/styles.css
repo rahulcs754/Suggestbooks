@@ -29,7 +29,7 @@ button {
 }
 
 .card {
-  width: 25%;
+  width: 200px;
   height: 288px;
   border: 1px solid #74acbb;
   display: inline-block;
