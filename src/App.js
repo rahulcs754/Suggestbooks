@@ -1,16 +1,13 @@
 import { useState } from "react";
 import "./styles.css";
 
-var basePath =
-  "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&limit=5&q=";
-
 export default function App() {
   var [output, setoutput] = useState("");
 
-  function searchSuggestHandler(e) {
-    var userInput = e.target.value;
+  function poppularClickHandler(e) {
+    var userInput = "popular";
     var callback =
-      "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&limit=5&q=underworld";
+      "https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1";
     console.log(callback);
     if (userInput !== "" && userInput !== null && userInput !== undefined) {
       fetch(callback)
@@ -24,13 +21,13 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Welcome Suggestion Website</h1>
+      <h1>🎥 Movie</h1>
       <p>
         you are searching movie like wanted or series then you just type name in
         input box
       </p>
-      <input onBlur={searchSuggestHandler} />
-      <h2>Output Below</h2>
+
+      <button onClick={poppularClickHandler}>Popular </button>
     </div>
   );
 }
