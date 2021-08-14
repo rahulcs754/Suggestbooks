@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./styles.css";
 
+const imgUrl =
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80";
 export default function App() {
   var [movie, setmovie] = useState("");
 
@@ -27,11 +29,16 @@ export default function App() {
 
       <hr />
       <div className="movieview">
-        <ul>
+        <div class="card-box">
           {Object.keys(movie).map((item, index) => {
-            return <li key={index}>{movie[item].original_title}</li>;
+            return (
+              <div class="card">
+                <img src={imgUrl} />
+                <div class="card-text">{movie[item].original_title}</div>
+              </div>
+            );
           })}
-        </ul>
+        </div>
       </div>
     </div>
   );
