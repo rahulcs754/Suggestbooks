@@ -29,8 +29,7 @@ export default function App() {
       <div className="movieview">
         <ul>
           {Object.keys(movie).map((item, index) => {
-            console.log(item);
-            return <li key={index}>{movie[item].id}</li>;
+            return <li key={index}>{movie[item].original_title}</li>;
           })}
         </ul>
       </div>
