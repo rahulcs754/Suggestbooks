@@ -9,14 +9,12 @@ export default function App() {
 
   function searchSuggestHandler(e) {
     var userInput = e.target.value;
-    var callback = basePath + encodeURI(userInput);
+    var callback =
+      "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&limit=5&q=underworld";
     console.log(callback);
     if (userInput !== "" && userInput !== null && userInput !== undefined) {
-      fetch(callback, {
-        headers: {
-          "Access-Control-Allow-Origin": "*"
-        }
-      })
+      fetch(callback)
+        .then((res) => res.json())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
     } else {
