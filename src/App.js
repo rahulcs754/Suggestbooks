@@ -2,21 +2,17 @@ import { useState } from "react";
 import "./styles.css";
 
 export default function App() {
-  var [output, setoutput] = useState("");
+  var [movie, setmovie] = useState("");
 
   function poppularClickHandler(e) {
     var userInput = "popular";
     var callback =
-      "https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1";
-    console.log(callback);
-    if (userInput !== "" && userInput !== null && userInput !== undefined) {
-      fetch(callback)
-        .then((res) => res.json())
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error));
-    } else {
-      alert("Please enter valid value");
-    }
+      "https://api.themoviedb.org/3/movie/popular?api_key=eef068dc56a744f6b8d02582e584cf18&language=en-US&page=1";
+
+    fetch(callback)
+      .then((res) => res.json())
+      .then((res) => setmovie(res.results))
+      .catch((error) => console.log("error", error));
   }
 
   return (
@@ -28,6 +24,16 @@ export default function App() {
       </p>
 
       <button onClick={poppularClickHandler}>Popular </button>
+
+      <hr />
+      <div className="movieview">
+        <ul>
+          {Object.keys(movie).map((item, index) => {
+            console.log(item);
+            return <li key={index}>{movie[item].id}</li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

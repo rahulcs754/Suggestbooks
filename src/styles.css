@@ -2,3 +2,15 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+button {
+  display: inline;
+  background-color: lightblue;
+  padding: 5px 20px;
+  border: 1px solid black;
+}
+.movieview {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
