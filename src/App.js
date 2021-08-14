@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./styles.css";
-import axios from "axios";
 
 var basePath =
   "https://tastedive.com/api/similar?k=421788-rahulshu-9015KM8J&limit=5&q=";
@@ -13,7 +12,11 @@ export default function App() {
     var callback = basePath + encodeURI(userInput);
     console.log(callback);
     if (userInput !== "" && userInput !== null && userInput !== undefined) {
-      axios(callback)
+      fetch(callback, {
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        }
+      })
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
     } else {
@@ -25,7 +28,6 @@ export default function App() {
     <div className="App">
       <h1>Welcome Suggestion Website</h1>
       <p>
-        {" "}
         you are searching movie like wanted or series then you just type name in
         input box
       </p>
